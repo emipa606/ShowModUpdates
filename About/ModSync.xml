@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ModSyncNinjaData>
-  <ID>[guid]</ID>
-  <ModName>[modname]</ModName>
-  <Version>[version]</Version>
+  <ID>6e062cd3-80db-4687-aa18-f3b0d6967618</ID>
+  <ModName>Show Mod Updates</ModName>
+  <Version>1.5.1</Version>
   <SaveBreaking>False</SaveBreaking>
   <Host name="Github">
-    <Owner>[username]</Owner>
-    <Project>[modwebpath]</Project>
+    <Owner>emipa606</Owner>
+    <Project>ShowModUpdates</Project>
     <AboutDir>About</AboutDir>
     <DownloadFrom>ModSyncMainPage</DownloadFrom>
     <Branch>master</Branch>
   </Host>
 </ModSyncNinjaData>
+
+
+
+
+
