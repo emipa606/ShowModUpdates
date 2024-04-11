@@ -12,10 +12,12 @@ public static class SavedGameLoaderNow_LoadGameFromSaveFileNow_Postfix
         if (Current.Game == null)
         {
             ShowModUpdates.CurrentSavePath = null;
+            ShowModUpdates.CurrentSaveName = null;
             return;
         }
 
         ShowModUpdates.CurrentSavePath = GenFilePaths.FilePathForSavedGame(fileName);
+        ShowModUpdates.CurrentSaveName = fileName;
 
         LongEventHandler.QueueLongEvent(ShowModUpdates.CheckModUpdates, "ShowModUpdates.CheckModUpdates.Save", true,
             null);

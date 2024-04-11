@@ -8,4 +8,6 @@
   <SMU.LogSave>Aucune sauvegarde précédente n'a été trouvée, il n'est pas possible d'afficher les mises à jour des modules.</SMU.LogSave>
   <SMU.LogMessage>J'ai trouvé {0} mises à jour de mods depuis que j'ai sauvegardé à {1}.</SMU.LogMessage>
   <SMU.LogMessageNone>Aucune mise à jour de mod n'a été trouvée depuis que la sauvegarde a été effectuée à {0}.</SMU.LogMessageNone>
+  <SMU.SteamMod>Le mod est chargé à partir du dossier mod de Steam</SMU.SteamMod>
+  <SMU.LocalMod>Le mod est chargé à partir du dossier local du mod</SMU.LocalMod>
 </LanguageData>

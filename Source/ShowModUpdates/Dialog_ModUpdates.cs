@@ -12,7 +12,10 @@ public class Dialog_ModUpdates : Window
     private static Vector2 scrollPosition;
     private static readonly Color alternateBackground = new Color(0.3f, 0.3f, 0.3f, 0.5f);
     private static readonly Vector2 previewImage = new Vector2(120f, 100f);
-    private static readonly Vector2 buttonSize = new Vector2(150f, 25f);
+    private static readonly Vector2 buttonSize = new Vector2(140f, 25f);
+    private static readonly Texture2D discordIcon = ContentFinder<Texture2D>.Get("UI/Discord");
+    private static readonly Texture2D steamIcon = ContentFinder<Texture2D>.Get("UI/Steam");
+    private static readonly Texture2D folderIcon = ContentFinder<Texture2D>.Get("UI/Folder");
 
     public Dialog_ModUpdates()
     {
@@ -21,7 +24,7 @@ public class Dialog_ModUpdates : Window
         absorbInputAroundWindow = true;
     }
 
-    public override Vector2 InitialSize => new Vector2(650f, 600f);
+    public override Vector2 InitialSize => new Vector2(700f, 700f);
 
     public override void DoWindowContents(Rect inRect)
     {
@@ -31,9 +34,8 @@ public class Dialog_ModUpdates : Window
 
         listingStandard.Label("SMU.ModListTitle".Translate(ShowModUpdates.ModUpdates.Count,
             ShowModUpdates.SelectedDate.ToString(CultureInfo.CurrentCulture.DateTimeFormat.SortableDateTimePattern)));
-        Text.Font = GameFont.Tiny;
-        var headerLabel = listingStandard.Label(ShowModUpdates.CurrentSavePath);
         Text.Font = GameFont.Small;
+        var headerLabel = listingStandard.Label(ShowModUpdates.CurrentSaveName);
         listingStandard.End();
 
         var borderRect = inRect;
@@ -104,14 +106,33 @@ public class Dialog_ModUpdates : Window
                 TooltipHandler.TipRegion(changelogRect, modInfo.OtherUrl.AbsoluteUri);
             }
 
+            if (modInfo.DiscordUri != null)
+            {
+                if (Widgets.ButtonImageFitted(bottomPart.RightPartPixels(25f), discordIcon))
+                {
+                    Application.OpenURL(modInfo.DiscordUri.AbsoluteUri);
+                }
+
+                TooltipHandler.TipRegion(bottomPart.RightPartPixels(25f), modInfo.DiscordUri.AbsoluteUri);
+            }
+
             var previewRect = rowRect.LeftPartPixels(previewImage.x);
 
             if (modInfo.ModMetaData.PreviewImage != null)
             {
+                Widgets.DrawBoxSolid(previewRect.ContractedBy(1f), Color.black);
                 Widgets.DrawTextureFitted(previewRect.ContractedBy(1f), modInfo.ModMetaData.PreviewImage, 1f);
             }
 
-            TooltipHandler.TipRegion(previewRect.ContractedBy(1f), modInfo.ModMetaData.Description);
+            if (modInfo.ModMetaData.OnSteamWorkshop)
+            {
+                Widgets.DrawTextureFitted(previewRect.BottomHalf().LeftHalf().LeftHalf(), steamIcon, 1f);
+                TooltipHandler.TipRegion(previewRect.BottomHalf().LeftHalf().LeftHalf(), "SMU.SteamMod".Translate());
+                continue;
+            }
+
+            Widgets.DrawTextureFitted(previewRect.BottomHalf().LeftHalf().LeftHalf(), folderIcon, 1f);
+            TooltipHandler.TipRegion(previewRect.BottomHalf().LeftHalf().LeftHalf(), "SMU.LocalMod".Translate());
         }
 
         scrollListing.End();

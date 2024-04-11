@@ -14,10 +14,18 @@ public static class ShowModUpdates
 {
     public static readonly Uri SteamBaseUri = new Uri("https://steamcommunity.com/sharedfiles/filedetails/?id=");
 
+    public static readonly List<string> DiscordDomains =
+    [
+        "dsc.gg",
+        "discord.gg",
+        "discord.com"
+    ];
+
     public static readonly Uri SteamBaseChangelogUri =
         new Uri("https://steamcommunity.com/sharedfiles/filedetails/changelog/");
 
     public static string CurrentSavePath;
+    public static string CurrentSaveName;
     public static DateTime SelectedDate;
     public static bool FinishedLoading;
     public static List<ModWithUpdateInfo> ModUpdates;
@@ -33,6 +41,7 @@ public static class ShowModUpdates
         if (CurrentSavePath == null && GenFilePaths.AllSavedGameFiles.FirstOrDefault() is { } fileInfo)
         {
             CurrentSavePath = fileInfo.FullName;
+            CurrentSaveName = fileInfo.Name;
         }
 
         if (CurrentSavePath == null)

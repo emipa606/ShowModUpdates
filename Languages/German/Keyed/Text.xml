@@ -8,4 +8,6 @@
   <SMU.LogSave>Kein vorheriger Spielstand gefunden, kann keine Mod-Updates anzeigen.</SMU.LogSave>
   <SMU.LogMessage>Es wurden {0} Mod-Updates seit dem Speichern um {1} gefunden.</SMU.LogMessage>
   <SMU.LogMessageNone>Keine Mod-Updates seit dem Speichern bei {0} gefunden</SMU.LogMessageNone>
+  <SMU.SteamMod>Mod wird aus dem Steam-Mod-Ordner geladen</SMU.SteamMod>
+  <SMU.LocalMod>Mod wird aus dem lokalen Mod-Ordner geladen</SMU.LocalMod>
 </LanguageData>

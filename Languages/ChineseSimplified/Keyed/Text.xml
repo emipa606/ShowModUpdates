@@ -8,4 +8,6 @@
   <SMU.LogSave>未找到以前的保存，无法显示修改更新。</SMU.LogSave>
   <SMU.LogMessage>自 {1} 保存后发现 {0} 个修改器更新</SMU.LogMessage>
   <SMU.LogMessageNone>自 {0} 保存后，未发现任何修改器更新。</SMU.LogMessageNone>
+  <SMU.SteamMod>模式从 Steam 模式文件夹加载</SMU.SteamMod>
+  <SMU.LocalMod>模块从本地模块文件夹加载</SMU.LocalMod>
 </LanguageData>
