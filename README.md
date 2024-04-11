@@ -3,10 +3,13 @@
 ![Image](https://i.imgur.com/iCj5o7O.png)
 
 
-This mod adds info about what mods have updated since you last saved your game.
-If any of the active mods have changed you can show a list of these with convenient links to the Steam, changelog or any other defined link of the mod.
+This mod adds info about what mods have updated since you last saved your game. On startup it will check against your most recently saved game but if you load an older save it will rescan based on that save.
 
-This was made to make it easier to locate what mods have changed, for example when trying to find out what mod has started causing an issue.
+If any of the active mods have changed you can show a list of these with convenient links to the Steam, changelog or any other defined link of the mod. If there is a Discord-link in the description, a link will be shown in the list. There is also an icon indicating if the mod is in the local mod-folder or the Steam-folder.
+
+If you have a really bad time and the game crashes before you can show this window, the mod also logs a list of the changed mods in the game-log on startup.
+
+This mod makes it easier for you to find out which mods have been updated since the last time you played, for example when trying to find out what mod has started causing an issue.
 
 ![Image](https://i.imgur.com/Ds0rBAD.png)
 

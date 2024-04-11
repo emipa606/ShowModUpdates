@@ -18,13 +18,13 @@ public class ModWithUpdateInfo(ModMetaData modMetaData)
         var steamId = ModMetaData.GetPublishedFileId();
         if (steamId != PublishedFileId_t.Invalid)
         {
-            SteamChangelog = new Uri(ShowModUpdates.SteamBaseChangelogUri, steamId.ToString());
-            SteamUri = new Uri(ShowModUpdates.SteamBaseUri, steamId.ToString());
+            Uri.TryCreate(ShowModUpdates.SteamBaseChangelogUri, steamId.ToString(), out SteamChangelog);
+            Uri.TryCreate(ShowModUpdates.SteamBaseUri, steamId.ToString(), out SteamUri);
         }
 
         if (!string.IsNullOrEmpty(ModMetaData.Url))
         {
-            OtherUrl = new Uri(ModMetaData.Url);
+            Uri.TryCreate(ModMetaData.Url, UriKind.Absolute, out OtherUrl);
         }
 
         if (string.IsNullOrEmpty(ModMetaData.Description))
@@ -47,7 +47,7 @@ public class ModWithUpdateInfo(ModMetaData modMetaData)
                 continue;
             }
 
-            DiscordUri = new Uri(url.Value);
+            Uri.TryCreate(url.Value, UriKind.Absolute, out DiscordUri);
             break;
         }
     }
