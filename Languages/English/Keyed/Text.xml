@@ -4,9 +4,14 @@
   <SMU.CurrentUpdate>{0} updated mod</SMU.CurrentUpdate>
   <SMU.ModListTitle>{0} updated mods since {1}</SMU.ModListTitle>
   <SMU.Changenotes>Changenotes</SMU.Changenotes>
+  <SMU.CurrentModVersion>Installed mod-version: {0}</SMU.CurrentModVersion>
+  <SMU.CheckAll>Also check disabled mods</SMU.CheckAll>
+  <SMU.CheckAllTT>Instead of only checking enabled mods, also disabled mods will be checked. This may increase the time it takes to process if subscribed to a lot of mods.</SMU.CheckAllTT>
   <SMU.SteamMod>Mod is loaded from the Steam mod-folder</SMU.SteamMod>
   <SMU.LocalMod>Mod is loaded from the local mod-folder</SMU.LocalMod>
   <SMU.LogSave>No previous save found, cannot show mod-updates.</SMU.LogSave>
   <SMU.LogMessage>Found {0} mod-updates since save was made at {1}</SMU.LogMessage>
+  <SMU.CheckingAll>Checking all installed mods</SMU.CheckingAll>
+  <SMU.CheckingEnabled>Checking only enabled mods</SMU.CheckingEnabled>
   <SMU.LogMessageNone>Found no mod-updates since save was made at {0}</SMU.LogMessageNone>
 </LanguageData>

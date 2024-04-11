@@ -10,4 +10,9 @@
   <SMU.LogMessageNone>Keine Mod-Updates seit dem Speichern bei {0} gefunden</SMU.LogMessageNone>
   <SMU.SteamMod>Mod wird aus dem Steam-Mod-Ordner geladen</SMU.SteamMod>
   <SMU.LocalMod>Mod wird aus dem lokalen Mod-Ordner geladen</SMU.LocalMod>
+  <SMU.CurrentModVersion>Installierte Mod-Version: {0}</SMU.CurrentModVersion>
+  <SMU.CheckAll>Prüfen Sie auch deaktivierte Mods</SMU.CheckAll>
+  <SMU.CheckAllTT>Anstatt nur aktivierte Mods zu prüfen, werden auch deaktivierte Mods geprüft. Dies kann die Verarbeitungszeit erhöhen, wenn viele Mods abonniert sind.</SMU.CheckAllTT>
+  <SMU.CheckingAll>Überprüfen aller installierten Mods</SMU.CheckingAll>
+  <SMU.CheckingEnabled>Überprüfung von nur aktivierten Mods</SMU.CheckingEnabled>
 </LanguageData>

@@ -59,19 +59,41 @@ public static class ShowModUpdates
         SelectedDate = File.GetLastWriteTime(CurrentSavePath);
         ModUpdates = [];
 
-        foreach (var modContentPack in LoadedModManager.RunningMods)
-        {
-            var aboutFilePath = Path.Combine(modContentPack.RootDir, "About", "About.xml");
-            if (!File.Exists(aboutFilePath))
-            {
-                Log.WarningOnce($"[ShowModUpdates]: Could not find About-file for '{modContentPack.Name}'.",
-                    modContentPack.GetHashCode());
-                continue;
-            }
 
-            if (File.GetLastWriteTime(aboutFilePath) > SelectedDate)
+        if (ShowModUpdatesMod.instance.Settings.CheckAll)
+        {
+            foreach (var installedMod in ModLister.AllInstalledMods)
             {
-                ModUpdates.Add(new ModWithUpdateInfo(modContentPack.ModMetaData));
+                var aboutFilePath = Path.Combine(installedMod.RootDir.FullName, "About", "About.xml");
+                if (!File.Exists(aboutFilePath))
+                {
+                    Log.WarningOnce($"[ShowModUpdates]: Could not find About-file for '{installedMod.Name}'.",
+                        installedMod.GetHashCode());
+                    continue;
+                }
+
+                if (File.GetLastWriteTime(aboutFilePath) > SelectedDate)
+                {
+                    ModUpdates.Add(new ModWithUpdateInfo(installedMod));
+                }
+            }
+        }
+        else
+        {
+            foreach (var modContentPack in LoadedModManager.RunningMods)
+            {
+                var aboutFilePath = Path.Combine(modContentPack.RootDir, "About", "About.xml");
+                if (!File.Exists(aboutFilePath))
+                {
+                    Log.WarningOnce($"[ShowModUpdates]: Could not find About-file for '{modContentPack.Name}'.",
+                        modContentPack.GetHashCode());
+                    continue;
+                }
+
+                if (File.GetLastWriteTime(aboutFilePath) > SelectedDate)
+                {
+                    ModUpdates.Add(new ModWithUpdateInfo(modContentPack.ModMetaData));
+                }
             }
         }
 

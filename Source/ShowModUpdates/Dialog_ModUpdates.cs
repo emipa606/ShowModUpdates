@@ -1,4 +1,5 @@
 using System.Globalization;
+using System.Linq;
 using UnityEngine;
 using Verse;
 
@@ -35,12 +36,17 @@ public class Dialog_ModUpdates : Window
         listingStandard.Label("SMU.ModListTitle".Translate(ShowModUpdates.ModUpdates.Count,
             ShowModUpdates.SelectedDate.ToString(CultureInfo.CurrentCulture.DateTimeFormat.SortableDateTimePattern)));
         Text.Font = GameFont.Small;
-        var headerLabel = listingStandard.Label(ShowModUpdates.CurrentSaveName);
+        var subtitleRect = listingStandard.GetRect(25f);
+        Widgets.Label(subtitleRect.RightHalf(),
+            ShowModUpdatesMod.instance.Settings.CheckAll
+                ? "SMU.CheckingAll".Translate()
+                : "SMU.CheckingEnabled".Translate());
+        Widgets.Label(subtitleRect.LeftHalf(), ShowModUpdates.CurrentSaveName);
         listingStandard.End();
 
         var borderRect = inRect;
-        borderRect.y += headerLabel.y + headerHeight;
-        borderRect.height -= headerLabel.y + headerHeight;
+        borderRect.y += subtitleRect.y + headerHeight;
+        borderRect.height -= subtitleRect.y + headerHeight;
         var scrollContentRect = inRect;
         scrollContentRect.height = ShowModUpdates.ModUpdates.Count * (rowHeight + 1);
         scrollContentRect.width -= 20;
@@ -52,7 +58,7 @@ public class Dialog_ModUpdates : Window
         scrollListing.Begin(scrollContentRect);
 
         var alternate = false;
-        foreach (var modInfo in ShowModUpdates.ModUpdates)
+        foreach (var modInfo in ShowModUpdates.ModUpdates.OrderBy(info => info.ModMetaData.Name))
         {
             var rowRectFull = scrollListing.GetRect(rowHeight);
             alternate = !alternate;

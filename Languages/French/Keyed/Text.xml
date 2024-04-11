@@ -10,4 +10,9 @@
   <SMU.LogMessageNone>Aucune mise à jour de mod n'a été trouvée depuis que la sauvegarde a été effectuée à {0}.</SMU.LogMessageNone>
   <SMU.SteamMod>Le mod est chargé à partir du dossier mod de Steam</SMU.SteamMod>
   <SMU.LocalMod>Le mod est chargé à partir du dossier local du mod</SMU.LocalMod>
+  <SMU.CurrentModVersion>Version installée du mod : {0}</SMU.CurrentModVersion>
+  <SMU.CheckAll>Vérifier également les mods désactivés</SMU.CheckAll>
+  <SMU.CheckAllTT>Au lieu de vérifier uniquement les mods activés, les mods désactivés seront également vérifiés. Cela peut augmenter le temps de traitement si l'on est abonné à un grand nombre de mods.</SMU.CheckAllTT>
+  <SMU.CheckingAll>Vérification de tous les mods installés</SMU.CheckingAll>
+  <SMU.CheckingEnabled>Vérifier uniquement les mods activés</SMU.CheckingEnabled>
 </LanguageData>

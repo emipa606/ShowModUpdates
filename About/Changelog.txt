@@ -1,5 +1,9 @@
 # Changelog for ShowModUpdates
 
+1.5.4 - Added setting to show all updated mods, not just enabled. Also sorts the mod-list alphabetically
+Used DeepL to update translations for ChineseSimplified, French, German
+
+
 1.5.3 - More stable Uri-creation, for malformed urls in the about-file
 
 
