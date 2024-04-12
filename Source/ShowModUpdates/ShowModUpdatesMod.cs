@@ -51,6 +51,8 @@ internal class ShowModUpdatesMod : Mod
         listing_Standard.Gap();
         listing_Standard.CheckboxLabeled("SMU.CheckAll".Translate(), ref Settings.CheckAll,
             "SMU.CheckAllTT".Translate());
+        listing_Standard.CheckboxLabeled("SMU.CheckOnline".Translate(), ref Settings.CheckOnline,
+            "SMU.CheckOnlineTT".Translate());
         if (currentVersion != null)
         {
             listing_Standard.Gap();
@@ -65,7 +67,7 @@ internal class ShowModUpdatesMod : Mod
     public override void WriteSettings()
     {
         base.WriteSettings();
-        LongEventHandler.QueueLongEvent(ShowModUpdates.CheckModUpdates, "ShowModUpdates.CheckModUpdates.Save", true,
-            null);
+        ShowModUpdates.FinishedLoading = false;
+        ShowModUpdates.ReadyToRead();
     }
 }

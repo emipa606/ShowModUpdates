@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<HugsLib.UpdateFeatureDef Abstract="true" Name="ShowModUpdates_UpdateFeatureBase">
+		<modNameReadable>ShowModUpdates</modNameReadable>
+		<linkUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=3218690663</linkUrl>
+	</HugsLib.UpdateFeatureDef>
+	<HugsLib.UpdateFeatureDef ParentName="ShowModUpdates_UpdateFeatureBase">
+		<defName>ShowModUpdates_1_5_4</defName>
+		<assemblyVersion>1.5.4</assemblyVersion>
+		<content>There is now an option to fetch mod-info directly from Steam.
+When enabled mod-descriptions and exact update date will be fetched to be able to display more acurate info.</content>
+	</HugsLib.UpdateFeatureDef>
+</Defs>
+

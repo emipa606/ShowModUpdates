@@ -11,12 +11,12 @@ public static class OptionListingUtility_DrawOptionListing_Postfix
 {
     public static void Postfix(Rect rect, List<ListableOption> optList, float __result)
     {
-        if (Current.ProgramState == ProgramState.Entry)
+        if (!ShowModUpdates.ReadyToRead())
         {
             return;
         }
 
-        if (!ShowModUpdates.FinishedLoading)
+        if (Current.ProgramState == ProgramState.Entry)
         {
             return;
         }

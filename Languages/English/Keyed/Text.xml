@@ -14,4 +14,7 @@
   <SMU.CheckingAll>Checking all installed mods</SMU.CheckingAll>
   <SMU.CheckingEnabled>Checking only enabled mods</SMU.CheckingEnabled>
   <SMU.LogMessageNone>Found no mod-updates since save was made at {0}</SMU.LogMessageNone>
+  <SMU.ScanningUpdatedMods>Scanning updated mods</SMU.ScanningUpdatedMods>
+  <SMU.CheckOnline>Check online</SMU.CheckOnline>
+  <SMU.CheckOnlineTT>Will connect to steam to get the updated description and the exact date the mod was updated</SMU.CheckOnlineTT>
 </LanguageData>

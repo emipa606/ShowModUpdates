@@ -8,18 +8,28 @@ namespace ShowModUpdates;
 public class ModWithUpdateInfo(ModMetaData modMetaData)
 {
     public readonly ModMetaData ModMetaData = modMetaData;
+    public readonly PublishedFileId_t PublishedFileId = modMetaData.GetPublishedFileId();
+    public string Description;
     public Uri DiscordUri;
     public Uri OtherUrl;
+    private bool Populated;
     public Uri SteamChangelog;
     public Uri SteamUri;
+    public bool Synced;
+    public DateTime Updated;
 
     public void PopulateLinks()
     {
-        var steamId = ModMetaData.GetPublishedFileId();
-        if (steamId != PublishedFileId_t.Invalid)
+        if (Populated)
         {
-            Uri.TryCreate(ShowModUpdates.SteamBaseChangelogUri, steamId.ToString(), out SteamChangelog);
-            Uri.TryCreate(ShowModUpdates.SteamBaseUri, steamId.ToString(), out SteamUri);
+            return;
+        }
+
+        Populated = true;
+        if (PublishedFileId != PublishedFileId_t.Invalid)
+        {
+            Uri.TryCreate(ShowModUpdates.SteamBaseChangelogUri, PublishedFileId.ToString(), out SteamChangelog);
+            Uri.TryCreate(ShowModUpdates.SteamBaseUri, PublishedFileId.ToString(), out SteamUri);
         }
 
         if (!string.IsNullOrEmpty(ModMetaData.Url))
@@ -27,12 +37,17 @@ public class ModWithUpdateInfo(ModMetaData modMetaData)
             Uri.TryCreate(ModMetaData.Url, UriKind.Absolute, out OtherUrl);
         }
 
-        if (string.IsNullOrEmpty(ModMetaData.Description))
+        if (string.IsNullOrEmpty(Description))
+        {
+            Description = ModMetaData.Description;
+        }
+
+        if (string.IsNullOrEmpty(Description))
         {
             return;
         }
 
-        var urlsInDescription = Regex.Matches(ModMetaData.Description,
+        var urlsInDescription = Regex.Matches(Description,
             "(http|ftp|https):\\/\\/([\\w_-]+(?:(?:\\.[\\w_-]+)+))([\\w.,@?^=%&:\\/~+#-]*[\\w@?^=%&\\/~+#-])");
 
         if (urlsInDescription.Count == 0)

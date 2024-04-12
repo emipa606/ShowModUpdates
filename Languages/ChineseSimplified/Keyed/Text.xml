@@ -15,4 +15,7 @@
   <SMU.CheckAllTT>不再只检查已启用的模式，还将检查已禁用的模式。如果订阅了很多模式，这可能会增加处理时间。</SMU.CheckAllTT>
   <SMU.CheckingAll>检查所有已安装的修改程序</SMU.CheckingAll>
   <SMU.CheckingEnabled>只检查已启用的模式</SMU.CheckingEnabled>
+  <SMU.ScanningUpdatedMods>扫描更新的修改器</SMU.ScanningUpdatedMods>
+  <SMU.CheckOnline>在线查询</SMU.CheckOnline>
+  <SMU.CheckOnlineTT>将连接到蒸汽，以获取更新说明和修改器的确切更新日期</SMU.CheckOnlineTT>
 </LanguageData>

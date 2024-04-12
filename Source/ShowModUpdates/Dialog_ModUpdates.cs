@@ -1,4 +1,3 @@
-using System.Globalization;
 using System.Linq;
 using UnityEngine;
 using Verse;
@@ -34,14 +33,14 @@ public class Dialog_ModUpdates : Window
         Text.Font = GameFont.Medium;
 
         listingStandard.Label("SMU.ModListTitle".Translate(ShowModUpdates.ModUpdates.Count,
-            ShowModUpdates.SelectedDate.ToString(CultureInfo.CurrentCulture.DateTimeFormat.SortableDateTimePattern)));
+            ShowModUpdates.NiceDate(ShowModUpdates.SelectedDate)));
         Text.Font = GameFont.Small;
-        var subtitleRect = listingStandard.GetRect(25f);
-        Widgets.Label(subtitleRect.RightHalf(),
+        var subtitleRect = listingStandard.GetRect(50f);
+        Widgets.Label(subtitleRect.BottomHalf(),
             ShowModUpdatesMod.instance.Settings.CheckAll
                 ? "SMU.CheckingAll".Translate()
                 : "SMU.CheckingEnabled".Translate());
-        Widgets.Label(subtitleRect.LeftHalf(), ShowModUpdates.CurrentSaveName);
+        Widgets.Label(subtitleRect.TopHalf(), ShowModUpdates.CurrentSaveName);
         listingStandard.End();
 
         var borderRect = inRect;
@@ -70,7 +69,17 @@ public class Dialog_ModUpdates : Window
             var rowRect = rowRectFull.ContractedBy(5f);
 
             var modInfoRect = rowRect.RightPartPixels(rowRect.width - previewImage.x - 5f);
-            Widgets.Label(modInfoRect.TopHalf(), modInfo.ModMetaData.Name);
+            var modName = modInfo.ModMetaData.Name;
+
+
+            Widgets.Label(modInfoRect.TopHalf(), modName);
+            if (modInfo.Updated != default)
+            {
+                Text.Anchor = TextAnchor.UpperRight;
+                Widgets.Label(modInfoRect.TopHalf(), ShowModUpdates.NiceDate(modInfo.Updated));
+                Text.Anchor = TextAnchor.UpperLeft;
+            }
+
 
             var currentX = 0;
             var bottomPart = modInfoRect.BottomHalf();

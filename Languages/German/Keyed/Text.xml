@@ -15,4 +15,7 @@
   <SMU.CheckAllTT>Anstatt nur aktivierte Mods zu prüfen, werden auch deaktivierte Mods geprüft. Dies kann die Verarbeitungszeit erhöhen, wenn viele Mods abonniert sind.</SMU.CheckAllTT>
   <SMU.CheckingAll>Überprüfen aller installierten Mods</SMU.CheckingAll>
   <SMU.CheckingEnabled>Überprüfung von nur aktivierten Mods</SMU.CheckingEnabled>
+  <SMU.ScanningUpdatedMods>Scannen von aktualisierten Mods</SMU.ScanningUpdatedMods>
+  <SMU.CheckOnline>Online prüfen</SMU.CheckOnline>
+  <SMU.CheckOnlineTT>Verbindet sich mit Steam, um die aktualisierte Beschreibung und das genaue Datum der Mod-Aktualisierung zu erhalten</SMU.CheckOnlineTT>
 </LanguageData>
