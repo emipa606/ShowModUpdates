@@ -1,14 +1,13 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Defs>
-	<TabulaRasa.UpdateDef Abstract="true" Name="ShowModUpdates_UpdateInfoBase">
-		<linkUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=3218690663</linkUrl>
-		<banner>UpdateInfo/ShowModUpdates</banner>
-	</TabulaRasa.UpdateDef>
-	<TabulaRasa.UpdateDef ParentName="ShowModUpdates_UpdateInfoBase">
-		<defName>ShowModUpdates_1_5_4</defName>
-		<date>2024/4/13</date>
-		<content>There is now an option to fetch mod-info directly from Steam.
+  <TabulaRasa.UpdateDef Abstract="true" Name="ShowModUpdates_UpdateInfoBase">
+    <linkUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=3218690663</linkUrl>
+    <banner>UpdateInfo/ShowModUpdates</banner>
+  </TabulaRasa.UpdateDef>
+  <TabulaRasa.UpdateDef ParentName="ShowModUpdates_UpdateInfoBase">
+    <defName>ShowModUpdates_1_5_4</defName>
+    <date>2024/4/13</date>
+    <content>There is now an option to fetch mod-info directly from Steam.
 When enabled mod-descriptions and exact update date will be fetched to be able to display more acurate info.</content>
-	</TabulaRasa.UpdateDef>
+  </TabulaRasa.UpdateDef>
 </Defs>
-

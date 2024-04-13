@@ -17,6 +17,7 @@ public static class SavedGameLoaderNow_LoadGameFromSaveFileNow_Postfix
 
         ShowModUpdates.CurrentSavePath = GenFilePaths.FilePathForSavedGame(fileName);
         ShowModUpdates.CurrentSaveName = $"{fileName}.rws";
+        ShowModUpdates.NoExistingSave = false;
         ShowModUpdates.FinishedLoading = false;
         ShowModUpdates.ReadyToRead();
     }

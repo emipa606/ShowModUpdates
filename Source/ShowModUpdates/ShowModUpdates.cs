@@ -25,6 +25,7 @@ public static class ShowModUpdates
     public static readonly Uri SteamBaseChangelogUri =
         new Uri("https://steamcommunity.com/sharedfiles/filedetails/changelog/");
 
+    public static bool NoExistingSave;
     public static string CurrentSavePath;
     public static string CurrentSaveName;
     public static DateTime SelectedDate;
@@ -48,6 +49,11 @@ public static class ShowModUpdates
 
     public static bool ReadyToRead()
     {
+        if (NoExistingSave)
+        {
+            return false;
+        }
+
         if (Scanning)
         {
             return false;
@@ -80,6 +86,7 @@ public static class ShowModUpdates
             Log.Message($"[ShowModUpdates]: {"SMU.LogSave".Translate()}");
             Scanning = false;
             FinishedLoading = true;
+            NoExistingSave = true;
             return;
         }
 

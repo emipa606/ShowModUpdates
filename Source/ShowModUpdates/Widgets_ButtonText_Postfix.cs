@@ -10,7 +10,8 @@ public static class Widgets_ButtonText_Postfix
 {
     public static void Postfix(Rect rect, string label)
     {
-        if (label != LanguageDatabase.activeLanguage.FriendlyNameNative || !ShowModUpdates.FinishedLoading ||
+        if (ShowModUpdates.NoExistingSave || label != LanguageDatabase.activeLanguage.FriendlyNameNative ||
+            !ShowModUpdates.FinishedLoading ||
             !ShowModUpdates.ModUpdates.Any())
         {
             return;
