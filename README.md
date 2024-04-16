@@ -13,6 +13,8 @@ If you have a really bad time and the game crashes before you can show this wind
 
 This mod makes it easier for you to find out which mods have been updated since the last time you played, for example when trying to find out what mod has started causing an issue.
 
+- Updated Chinese translation by Charlizsz
+
 ![Image](https://i.imgur.com/Ds0rBAD.png)
 
 Since modding is just a hobby for me I expect no donations to keep modding. If you still want to show your support you can gift me anything from my https://store.steampowered.com/wishlist/id/Mlie]Wishlist or buy me a cup of tea.

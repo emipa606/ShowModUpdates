@@ -1,5 +1,8 @@
 # Changelog for ShowModUpdates
 
+1.5.7 - Added Russian translation, thanks to LeonusDH
+
+
 1.5.6 - Should no longer trigger issues when there are no saves. Updated chinese translation by Charlizsz
 
 
