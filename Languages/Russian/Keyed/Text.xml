@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <SMU.CurrentUpdates>{0} обновлённых модов</SMU.CurrentUpdates>
+  <SMU.CurrentUpdate>{0} обновлённый мод</SMU.CurrentUpdate>
+  <SMU.ModListTitle>{0} обновлённых модов {1}</SMU.ModListTitle>
+  <SMU.Changenotes>Список изменений</SMU.Changenotes>
+  <SMU.CurrentModVersion>Установленная версия мода: {0}</SMU.CurrentModVersion>
+  <SMU.CheckAll>Также проверять выключенные моды</SMU.CheckAll>
+  <SMU.CheckAllTT>Вместо того чтобы проверять только включённые моды, будут проверяться и выключенные. Это может увеличить время обработки, если вы подписаны на большое количество модов.</SMU.CheckAllTT>
+  <SMU.SteamMod>Мод загружается из папки модов Steam</SMU.SteamMod>
+  <SMU.LocalMod>Мод загружается из локальной папки модов</SMU.LocalMod>
+  <SMU.LogSave>Не найдено ни одного предыдущего сохранения, невозможно показать обновления мода.</SMU.LogSave>
+  <SMU.LogMessage>Найдено {0} обновлений модов с момента сохранения в {1}</SMU.LogMessage>
+  <SMU.CheckingAll>Проверка всех установленных модов</SMU.CheckingAll>
+  <SMU.CheckingEnabled>Проверка только включённых модов</SMU.CheckingEnabled>
+  <SMU.LogMessageNone>Не обнаружено никаких обновлений модов с момента сохранения в {0}</SMU.LogMessageNone>
+  <SMU.ScanningUpdatedMods>Проверка обновлённых модов</SMU.ScanningUpdatedMods>
+  <SMU.CheckOnline>Проверка онлайн</SMU.CheckOnline>
+  <SMU.CheckOnlineTT>Подключится к steam, чтобы получить обновлённое описание и точную дату обновления мода</SMU.CheckOnlineTT>
+
+</LanguageData>
