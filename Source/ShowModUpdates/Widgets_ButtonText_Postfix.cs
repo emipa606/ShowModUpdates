@@ -17,6 +17,11 @@ public static class Widgets_ButtonText_Postfix
             return;
         }
 
+        if (Find.WindowStack.AnyWindowAbsorbingAllInput)
+        {
+            return;
+        }
+
         var newRect = rect;
         newRect.y += rect.height + 5f;
         if (Widgets.ButtonText(newRect,

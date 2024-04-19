@@ -1,5 +1,8 @@
 # Changelog for ShowModUpdates
 
+1.5.8 - Should no longer block the autosave interval button
+
+
 1.5.7 - Added Russian translation, thanks to LeonusDH
 
 
