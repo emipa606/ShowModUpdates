@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <SMU.CurrentUpdates>{0} 個更新的Mod</SMU.CurrentUpdates>
+  <SMU.CurrentUpdate>{0} 個更新的Mod</SMU.CurrentUpdate>
+  <SMU.ModListTitle>{0} 個自 {1} 起更新的 Mod</SMU.ModListTitle>
+  <SMU.Changenotes>更新日誌</SMU.Changenotes>
+  <SMU.LogSave>未找到之前的存檔，無法顯示Mod更新。</SMU.LogSave>
+  <SMU.LogMessage>自 {1} 後，存檔中發現 {0} 個Mod更新</SMU.LogMessage>
+  <SMU.LogMessageNone>自 {0} 保存以來，存檔中未發現任何Mod更新。</SMU.LogMessageNone>
+  <SMU.SteamMod>Mod 從 Steam 平臺的 Mod 資料夾中載入</SMU.SteamMod>
+  <SMU.LocalMod>Mod 從本地 Mod 資料夾載入</SMU.LocalMod>
+  <SMU.CurrentModVersion>已安裝的Mod版本：{0}</SMU.CurrentModVersion>
+  <SMU.CheckAll>檢查所有已安裝的Mod </SMU.CheckAll>
+  <SMU.CheckAllTT>不再只檢查已啟用的Mod ，還將檢查已關閉的Mod 。如果您訂閱了很多Mod，這可能會增加處理時間。</SMU.CheckAllTT>
+  <SMU.CheckingAll>檢查所有已安裝的Mod </SMU.CheckingAll>
+  <SMU.CheckingEnabled>只檢查已啟用的Mod</SMU.CheckingEnabled>
+  <SMU.ScanningUpdatedMods>掃描已更新的Mod </SMU.ScanningUpdatedMods>
+  <SMU.CheckOnline>在線查詢</SMU.CheckOnline>
+  <SMU.CheckOnlineTT>將連接到Steam平臺，以獲取Mod的詳細更新說明及更新日期</SMU.CheckOnlineTT>
+</LanguageData>

@@ -1,5 +1,8 @@
 # Changelog for ShowModUpdates
 
+1.5.9 - Updated traditional chinese translation by 摄魂狼
+
+
 1.5.8 - Should no longer block the autosave interval button
 
 
