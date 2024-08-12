@@ -1,5 +1,8 @@
 # Changelog for ShowModUpdates
 
+1.5.10 - Updated spanish translation, thanks Ferchu
+
+
 1.5.9 - Updated traditional chinese translation by 摄魂狼
 
 
