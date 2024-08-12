@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <SMU.CurrentUpdates>{0} mods actualizados</SMU.CurrentUpdates>
+  <SMU.CurrentUpdate>{0} mod actualizado</SMU.CurrentUpdate>
+  <SMU.ModListTitle>{0} mods actualizados desde {1}</SMU.ModListTitle>
+  <SMU.Changenotes>Notas de cambio</SMU.Changenotes>
+  <SMU.CurrentModVersion>Versión del mod instalada: {0}</SMU.CurrentModVersion>
+  <SMU.CheckAll>También comprobar mods desactivados</SMU.CheckAll>
+  <SMU.CheckAllTT>En lugar de solo comprobar mods habilitados, también se comprobarán los deshabilitados. Esto puede aumentar el tiempo de procesamiento si estás suscrito a muchos mods.</SMU.CheckAllTT>
+  <SMU.SteamMod>El mod se carga desde la carpeta de mods de Steam</SMU.SteamMod>
+  <SMU.LocalMod>El mod se carga desde la carpeta de mods local</SMU.LocalMod>
+  <SMU.LogSave>No se encontró una partida guardada anterior, no se pueden mostrar actualizaciones de mods.</SMU.LogSave>
+  <SMU.LogMessage>Se encontraron {0} actualizaciones de mods desde que se hizo la partida guardada en {1}</SMU.LogMessage>
+  <SMU.CheckingAll>Comprobando todos los mods instalados</SMU.CheckingAll>
+  <SMU.CheckingEnabled>Comprobando solo mods habilitados</SMU.CheckingEnabled>
+  <SMU.LogMessageNone>No se encontraron actualizaciones de mods desde que se hizo la partida guardada en {0}</SMU.LogMessageNone>
+  <SMU.ScanningUpdatedMods>Explorando mods actualizados</SMU.ScanningUpdatedMods>
+  <SMU.CheckOnline>Comprobar en línea</SMU.CheckOnline>
+  <SMU.CheckOnlineTT>Se conectará a Steam para obtener la descripción actualizada y la fecha exacta en que se actualizó el mod</SMU.CheckOnlineTT>
+</LanguageData>
