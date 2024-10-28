@@ -3,10 +3,11 @@
 ![Image](https://i.imgur.com/iCj5o7O.png)
 
 This mod adds info about what mods have updated since you last saved your game. On startup it will check against your most recently saved game but if you load an older save it will rescan based on that save.
+It will also check if RimWorld itself has updated.
 
 If any of the active mods have changed you can show a list of these with convenient links to the Steam, changelog or any other defined link of the mod. If there is a Discord-link in the description, a link will be shown in the list. There is also an icon indicating if the mod is in the local mod-folder or the Steam-folder.
 
-You can also enable checking all installed mods instead of just enabled mods as well as fetch mod-info online from Steam.
+You can also enable checking all installed mods instead of just enabled mods as well as fetch mod-info online from Steam. If you want to sort the mod-list by update-date there is a mod-option for that too.
 
 If you have a really bad time and the game crashes before you can show this window, the mod also logs a list of the changed mods in the game-log on startup.
 
