@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
   <SMU.CurrentUpdates>{0} updated mods</SMU.CurrentUpdates>
+  <SMU.GameUpdated>RimWorld updated</SMU.GameUpdated>
   <SMU.CurrentUpdate>{0} updated mod</SMU.CurrentUpdate>
   <SMU.ModListTitle>{0} updated mods since {1}</SMU.ModListTitle>
   <SMU.Changenotes>Changenotes</SMU.Changenotes>
@@ -15,6 +16,8 @@
   <SMU.CheckingEnabled>Checking only enabled mods</SMU.CheckingEnabled>
   <SMU.LogMessageNone>Found no mod-updates since save was made at {0}</SMU.LogMessageNone>
   <SMU.ScanningUpdatedMods>Scanning updated mods</SMU.ScanningUpdatedMods>
+  <SMU.OrderByDate>Sort by update-date</SMU.OrderByDate>
+  <SMU.OrderByDateTT>Will order the update list by when each mod updated instead of in alphabetical order</SMU.OrderByDateTT>
   <SMU.CheckOnline>Check online</SMU.CheckOnline>
   <SMU.CheckOnlineTT>Will connect to steam to get the updated description and the exact date the mod was updated</SMU.CheckOnlineTT>
 </LanguageData>

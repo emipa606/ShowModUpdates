@@ -21,7 +21,7 @@ public static class OptionListingUtility_DrawOptionListing_Postfix
             return;
         }
 
-        if (!ShowModUpdates.ModUpdates.Any())
+        if (!ShowModUpdates.ModUpdates.Any() && !ShowModUpdates.GameUpdated)
         {
             return;
         }
@@ -34,10 +34,7 @@ public static class OptionListingUtility_DrawOptionListing_Postfix
 
         var newRect = new Rect(170f + 24f + 3f, __result + 10f, rect.width, 35f);
 
-        if (Widgets.ButtonText(newRect,
-                ShowModUpdates.ModUpdates.Count == 1
-                    ? "SMU.CurrentUpdate".Translate(ShowModUpdates.ModUpdates.Count)
-                    : "SMU.CurrentUpdates".Translate(ShowModUpdates.ModUpdates.Count)))
+        if (Widgets.ButtonText(newRect, ShowModUpdates.GetUpdatesString()))
         {
             Find.WindowStack.Add(new Dialog_ModUpdates());
         }

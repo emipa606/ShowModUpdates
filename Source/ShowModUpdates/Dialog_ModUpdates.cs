@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.Linq;
+using RimWorld;
 using UnityEngine;
 using Verse;
 
@@ -16,12 +18,16 @@ public class Dialog_ModUpdates : Window
     private static readonly Texture2D discordIcon = ContentFinder<Texture2D>.Get("UI/Discord");
     private static readonly Texture2D steamIcon = ContentFinder<Texture2D>.Get("UI/Steam");
     private static readonly Texture2D folderIcon = ContentFinder<Texture2D>.Get("UI/Folder");
+    private static List<ModWithUpdateInfo> localModUpdates;
 
     public Dialog_ModUpdates()
     {
         doCloseX = true;
         forcePause = true;
         absorbInputAroundWindow = true;
+        localModUpdates = ShowModUpdatesMod.instance.Settings.OrderByDate
+            ? ShowModUpdates.ModUpdates.OrderByDescending(info => info.Updated).ToList()
+            : ShowModUpdates.ModUpdates.OrderBy(info => info.ModMetaData.Name).ToList();
     }
 
     public override Vector2 InitialSize => new Vector2(700f, 700f);
@@ -32,7 +38,7 @@ public class Dialog_ModUpdates : Window
         listingStandard.Begin(inRect);
         Text.Font = GameFont.Medium;
 
-        listingStandard.Label("SMU.ModListTitle".Translate(ShowModUpdates.ModUpdates.Count,
+        listingStandard.Label("SMU.ModListTitle".Translate(localModUpdates.Count,
             ShowModUpdates.NiceDate(ShowModUpdates.SelectedDate)));
         Text.Font = GameFont.Small;
         var subtitleRect = listingStandard.GetRect(50f);
@@ -47,7 +53,12 @@ public class Dialog_ModUpdates : Window
         borderRect.y += subtitleRect.y + headerHeight;
         borderRect.height -= subtitleRect.y + headerHeight;
         var scrollContentRect = inRect;
-        scrollContentRect.height = ShowModUpdates.ModUpdates.Count * (rowHeight + 1);
+        scrollContentRect.height = localModUpdates.Count * (rowHeight + 1);
+        if (ShowModUpdates.GameUpdated)
+        {
+            scrollContentRect.height += rowHeight;
+        }
+
         scrollContentRect.width -= 20;
         scrollContentRect.x = 0;
         scrollContentRect.y = 0;
@@ -57,7 +68,72 @@ public class Dialog_ModUpdates : Window
         scrollListing.Begin(scrollContentRect);
 
         var alternate = false;
-        foreach (var modInfo in ShowModUpdates.ModUpdates.OrderBy(info => info.ModMetaData.Name))
+
+        if (ShowModUpdates.GameUpdated)
+        {
+            var rowRectFull = scrollListing.GetRect(rowHeight);
+            alternate = true;
+            Widgets.DrawBoxSolid(rowRectFull, alternateBackground);
+
+            var rowRect = rowRectFull.ContractedBy(5f);
+
+            var modInfoRect = rowRect.RightPartPixels(rowRect.width - previewImage.x - 5f);
+            var modName = $"RimWorld {VersionControl.CurrentVersionString}";
+
+
+            Widgets.Label(modInfoRect.TopHalf(), modName);
+
+
+            var currentX = 0;
+            var bottomPart = modInfoRect.BottomHalf();
+            var steamRect = new Rect(bottomPart.position, buttonSize);
+            if (Widgets.ButtonText(steamRect, "SteamDB"))
+            {
+                Application.OpenURL(ShowModUpdates.RimworldSteamDB);
+            }
+
+            TooltipHandler.TipRegion(steamRect, ShowModUpdates.RimworldSteamDB);
+
+            currentX += (int)buttonSize.x + 5;
+
+            var changelogRect = new Rect(new Vector2(bottomPart.x + currentX, bottomPart.y), buttonSize);
+            if (Widgets.ButtonText(changelogRect, "SMU.Changenotes".Translate()))
+            {
+                Application.OpenURL(ShowModUpdates.RimworldChangenotes);
+            }
+
+            TooltipHandler.TipRegion(changelogRect, ShowModUpdates.RimworldChangenotes);
+            currentX += (int)buttonSize.x + 5;
+
+
+            changelogRect = new Rect(new Vector2(bottomPart.x + currentX, bottomPart.y), buttonSize);
+            var wikiString = $"{ShowModUpdates.RimworldWiki}{VersionControl.CurrentVersionString}";
+            if (Widgets.ButtonText(changelogRect, "Wiki"))
+            {
+                Application.OpenURL(wikiString);
+            }
+
+            TooltipHandler.TipRegion(changelogRect, wikiString);
+
+            if (Widgets.ButtonImageFitted(bottomPart.RightPartPixels(25f), discordIcon))
+            {
+                Application.OpenURL(ShowModUpdates.RimworldDiscord);
+            }
+
+            TooltipHandler.TipRegion(bottomPart.RightPartPixels(25f), ShowModUpdates.RimworldDiscord);
+
+            var previewRect = rowRect.LeftPartPixels(previewImage.x);
+
+            Widgets.DrawBoxSolid(previewRect.ContractedBy(1f), Color.black);
+            Widgets.DrawTextureFitted(previewRect.ContractedBy(1f), ShowModUpdates.RimworldBackGround, 1f);
+
+            Widgets.DrawTextureFitted(previewRect.TopHalf().ContractedBy(previewRect.width * 0.2f, 0),
+                ShowModUpdates.RimworldTitle, 1f);
+            Widgets.DrawTextureFitted(previewRect.BottomHalf().LeftHalf().LeftHalf(), ShowModUpdates.RimworldIcon, 1f);
+            TooltipHandler.TipRegion(previewRect.BottomHalf().LeftHalf().LeftHalf(), "RimWorld");
+        }
+
+        foreach (var modInfo in localModUpdates)
         {
             var rowRectFull = scrollListing.GetRect(rowHeight);
             alternate = !alternate;

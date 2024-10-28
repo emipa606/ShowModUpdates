@@ -11,8 +11,12 @@ public static class Widgets_ButtonText_Postfix
     public static void Postfix(Rect rect, string label)
     {
         if (ShowModUpdates.NoExistingSave || label != LanguageDatabase.activeLanguage.FriendlyNameNative ||
-            !ShowModUpdates.FinishedLoading ||
-            !ShowModUpdates.ModUpdates.Any())
+            !ShowModUpdates.FinishedLoading)
+        {
+            return;
+        }
+
+        if (!ShowModUpdates.ModUpdates.Any() && !ShowModUpdates.GameUpdated)
         {
             return;
         }
@@ -24,10 +28,7 @@ public static class Widgets_ButtonText_Postfix
 
         var newRect = rect;
         newRect.y += rect.height + 5f;
-        if (Widgets.ButtonText(newRect,
-                ShowModUpdates.ModUpdates.Count == 1
-                    ? "SMU.CurrentUpdate".Translate(ShowModUpdates.ModUpdates.Count)
-                    : "SMU.CurrentUpdates".Translate(ShowModUpdates.ModUpdates.Count)))
+        if (Widgets.ButtonText(newRect, ShowModUpdates.GetUpdatesString()))
         {
             Find.WindowStack.Add(new Dialog_ModUpdates());
         }

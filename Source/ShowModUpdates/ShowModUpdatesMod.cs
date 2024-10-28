@@ -53,6 +53,12 @@ internal class ShowModUpdatesMod : Mod
             "SMU.CheckAllTT".Translate());
         listing_Standard.CheckboxLabeled("SMU.CheckOnline".Translate(), ref Settings.CheckOnline,
             "SMU.CheckOnlineTT".Translate());
+        if (Settings.CheckOnline)
+        {
+            listing_Standard.CheckboxLabeled("SMU.OrderByDate".Translate(), ref Settings.OrderByDate,
+                "SMU.OrderByDateTT".Translate());
+        }
+
         if (currentVersion != null)
         {
             listing_Standard.Gap();

@@ -5,7 +5,9 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using HarmonyLib;
+using RimWorld;
 using Steamworks;
+using UnityEngine;
 using Verse;
 
 namespace ShowModUpdates;
@@ -14,6 +16,16 @@ namespace ShowModUpdates;
 public static class ShowModUpdates
 {
     public static readonly Uri SteamBaseUri = new Uri("https://steamcommunity.com/sharedfiles/filedetails/?id=");
+
+    public static readonly Texture2D RimworldIcon = ContentFinder<Texture2D>.Get("UI/HeroArt/RimWorldLogo");
+    public static readonly Texture2D RimworldTitle = ContentFinder<Texture2D>.Get("UI/HeroArt/GameTitle");
+    public static readonly Texture2D RimworldBackGround = ContentFinder<Texture2D>.Get("UI/HeroArt/BGPlanet");
+    public static readonly string RimworldChangenotes = "https://store.steampowered.com/news/app/294100";
+    public static readonly string RimworldDiscord = "https://discord.gg/rimworld";
+    public static readonly string RimworldWiki = "https://rimworldwiki.com/wiki/Version/";
+    public static readonly string RimworldSteamDB = "https://steamdb.info/app/294100/patchnotes/";
+
+    public static bool GameUpdated;
 
     public static readonly List<string> DiscordDomains =
     [
@@ -28,6 +40,7 @@ public static class ShowModUpdates
     public static bool NoExistingSave;
     public static string CurrentSavePath;
     public static string CurrentSaveName;
+    public static FileInfo CurrentSave;
     public static DateTime SelectedDate;
     public static bool FinishedLoading;
     public static List<ModWithUpdateInfo> ModUpdates;
@@ -75,10 +88,14 @@ public static class ShowModUpdates
 
     public static void CheckModUpdates()
     {
+        GameUpdated = false;
+
         if (CurrentSavePath == null && GenFilePaths.AllSavedGameFiles.FirstOrDefault() is { } fileInfo)
         {
+            Log.Message($"[ShowModUpdates]: Found latest save, {fileInfo.Name}");
             CurrentSavePath = fileInfo.FullName;
             CurrentSaveName = fileInfo.Name;
+            CurrentSave = fileInfo;
         }
 
         if (CurrentSavePath == null)
@@ -87,6 +104,7 @@ public static class ShowModUpdates
             Scanning = false;
             FinishedLoading = true;
             NoExistingSave = true;
+            CurrentSave = null;
             return;
         }
 
@@ -95,12 +113,21 @@ public static class ShowModUpdates
             Log.Warning($"[ShowModUpdates]: Could not find save-file at {CurrentSavePath}, cannot show mod-updates.");
             Scanning = false;
             FinishedLoading = true;
+            CurrentSave = null;
             return;
         }
 
         SelectedDate = File.GetLastWriteTime(CurrentSavePath);
+        Log.Message($"[ShowModUpdates]: Last save writetime, {SelectedDate}");
         ModUpdates = [];
 
+        var saveVersion = ScribeMetaHeaderUtility.GameVersionOf(CurrentSave);
+        if (saveVersion != VersionControl.CurrentVersionString)
+        {
+            GameUpdated = true;
+            Log.Message(
+                $"[ShowModUpdates]: Rimworld has updated since the last save, is now {VersionControl.CurrentVersionString}, was {saveVersion}");
+        }
 
         if (ShowModUpdatesMod.instance.Settings.CheckAll)
         {
@@ -239,5 +266,24 @@ public static class ShowModUpdates
     private static void OnSteamUGCQueryCompleted(SteamUGCQueryCompleted_t pCallback, bool bIOFailure)
     {
         collectionQueryResult = pCallback;
+    }
+
+    public static string GetUpdatesString()
+    {
+        if (!ModUpdates.Any())
+        {
+            return "SMU.GameUpdated".Translate();
+        }
+
+        var returnString = ModUpdates.Count == 1
+            ? "SMU.CurrentUpdate".Translate(ModUpdates.Count)
+            : "SMU.CurrentUpdates".Translate(ModUpdates.Count);
+
+        if (GameUpdated)
+        {
+            returnString += $"{Environment.NewLine}{"SMU.GameUpdated".Translate()}";
+        }
+
+        return returnString;
     }
 }
