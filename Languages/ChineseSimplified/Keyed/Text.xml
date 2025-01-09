@@ -22,4 +22,6 @@
   <SMU.GameUpdated>RimWorld 已更新</SMU.GameUpdated>
   <SMU.OrderByDate>按更新日期排序</SMU.OrderByDate>
   <SMU.OrderByDateTT>将按每个模式的更新时间而不是字母顺序排列更新列表</SMU.OrderByDateTT>
+  <SMU.preferOverlay>首选蒸汽叠加链接</SMU.preferOverlay>
+  <SMU.preferOverlaytt>打开 MOD 页面时，优先选择在 Steam 叠加而不是默认浏览器中启动它</SMU.preferOverlaytt>
 </LanguageData>

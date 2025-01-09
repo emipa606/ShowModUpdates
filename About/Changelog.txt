@@ -1,5 +1,9 @@
 # Changelog for ShowModUpdates
 
+1.5.13 - Added option to open links in the steam overlay if possible
+Used DeepL to update translations for ChineseSimplified, French, German, Russian, Spanish
+
+
 1.5.12 - Removed the zipped version that was left in the mod-folder
 
 

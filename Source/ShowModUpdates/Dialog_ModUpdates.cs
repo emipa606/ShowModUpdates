@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using RimWorld;
+using Steamworks;
 using UnityEngine;
 using Verse;
+using Verse.Steam;
 
 namespace ShowModUpdates;
 
@@ -41,6 +43,14 @@ public class Dialog_ModUpdates : Window
         listingStandard.Label("SMU.ModListTitle".Translate(localModUpdates.Count,
             ShowModUpdates.NiceDate(ShowModUpdates.SelectedDate)));
         Text.Font = GameFont.Small;
+
+        if (SteamManager.Initialized && SteamUtils.IsOverlayEnabled())
+        {
+            listingStandard.CheckboxLabeled("SMU.preferOverlay".Translate(),
+                ref ShowModUpdatesMod.instance.Settings.PreferOverlay,
+                "SMU.preferOverlaytt".Translate());
+        }
+
         var subtitleRect = listingStandard.GetRect(50f);
         Widgets.Label(subtitleRect.BottomHalf(),
             ShowModUpdatesMod.instance.Settings.CheckAll
@@ -89,7 +99,7 @@ public class Dialog_ModUpdates : Window
             var steamRect = new Rect(bottomPart.position, buttonSize);
             if (Widgets.ButtonText(steamRect, "SteamDB"))
             {
-                Application.OpenURL(ShowModUpdates.RimworldSteamDB);
+                openUrl(ShowModUpdates.RimworldSteamDB);
             }
 
             TooltipHandler.TipRegion(steamRect, ShowModUpdates.RimworldSteamDB);
@@ -99,7 +109,7 @@ public class Dialog_ModUpdates : Window
             var changelogRect = new Rect(new Vector2(bottomPart.x + currentX, bottomPart.y), buttonSize);
             if (Widgets.ButtonText(changelogRect, "SMU.Changenotes".Translate()))
             {
-                Application.OpenURL(ShowModUpdates.RimworldChangenotes);
+                openUrl(ShowModUpdates.RimworldChangenotes);
             }
 
             TooltipHandler.TipRegion(changelogRect, ShowModUpdates.RimworldChangenotes);
@@ -110,14 +120,14 @@ public class Dialog_ModUpdates : Window
             var wikiString = $"{ShowModUpdates.RimworldWiki}{VersionControl.CurrentVersionString}";
             if (Widgets.ButtonText(changelogRect, "Wiki"))
             {
-                Application.OpenURL(wikiString);
+                openUrl(wikiString);
             }
 
             TooltipHandler.TipRegion(changelogRect, wikiString);
 
             if (Widgets.ButtonImageFitted(bottomPart.RightPartPixels(25f), discordIcon))
             {
-                Application.OpenURL(ShowModUpdates.RimworldDiscord);
+                openUrl(ShowModUpdates.RimworldDiscord);
             }
 
             TooltipHandler.TipRegion(bottomPart.RightPartPixels(25f), ShowModUpdates.RimworldDiscord);
@@ -164,7 +174,7 @@ public class Dialog_ModUpdates : Window
                 var steamRect = new Rect(bottomPart.position, buttonSize);
                 if (Widgets.ButtonText(steamRect, "Steam"))
                 {
-                    Application.OpenURL(modInfo.SteamUri.AbsoluteUri);
+                    openUrl(modInfo.SteamUri.AbsoluteUri);
                 }
 
                 TooltipHandler.TipRegion(steamRect, modInfo.SteamUri.AbsoluteUri);
@@ -177,7 +187,7 @@ public class Dialog_ModUpdates : Window
                 var changelogRect = new Rect(new Vector2(bottomPart.x + currentX, bottomPart.y), buttonSize);
                 if (Widgets.ButtonText(changelogRect, "SMU.Changenotes".Translate()))
                 {
-                    Application.OpenURL(modInfo.SteamChangelog.AbsoluteUri);
+                    openUrl(modInfo.SteamChangelog.AbsoluteUri);
                 }
 
                 TooltipHandler.TipRegion(changelogRect, modInfo.SteamChangelog.AbsoluteUri);
@@ -191,7 +201,7 @@ public class Dialog_ModUpdates : Window
                 var changelogRect = new Rect(new Vector2(bottomPart.x + currentX, bottomPart.y), buttonSize);
                 if (Widgets.ButtonText(changelogRect, domain))
                 {
-                    Application.OpenURL(modInfo.OtherUrl.AbsoluteUri);
+                    openUrl(modInfo.OtherUrl.AbsoluteUri);
                 }
 
                 TooltipHandler.TipRegion(changelogRect, modInfo.OtherUrl.AbsoluteUri);
@@ -201,7 +211,7 @@ public class Dialog_ModUpdates : Window
             {
                 if (Widgets.ButtonImageFitted(bottomPart.RightPartPixels(25f), discordIcon))
                 {
-                    Application.OpenURL(modInfo.DiscordUri.AbsoluteUri);
+                    openUrl(modInfo.DiscordUri.AbsoluteUri);
                 }
 
                 TooltipHandler.TipRegion(bottomPart.RightPartPixels(25f), modInfo.DiscordUri.AbsoluteUri);
@@ -228,5 +238,17 @@ public class Dialog_ModUpdates : Window
 
         scrollListing.End();
         Widgets.EndScrollView();
+    }
+
+    private static void openUrl(string url)
+    {
+        if (ShowModUpdatesMod.instance.Settings.PreferOverlay)
+        {
+            SteamUtility.OpenUrl(url);
+        }
+        else
+        {
+            Application.OpenURL(url);
+        }
     }
 }

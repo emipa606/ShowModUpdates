@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
+  <SMU.preferOverlay>Prefer Steam overlay for links</SMU.preferOverlay>
+  <SMU.preferOverlaytt>When opening a mod-page, will prefer to launch it in the Steam overlay instead of the default browser</SMU.preferOverlaytt>
   <SMU.CurrentUpdates>{0} updated mods</SMU.CurrentUpdates>
   <SMU.GameUpdated>RimWorld updated</SMU.GameUpdated>
   <SMU.CurrentUpdate>{0} updated mod</SMU.CurrentUpdate>

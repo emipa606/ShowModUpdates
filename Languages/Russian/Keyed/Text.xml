@@ -21,4 +21,6 @@
   <SMU.GameUpdated>RimWorld обновлен</SMU.GameUpdated>
   <SMU.OrderByDate>Сортировать по дате обновления</SMU.OrderByDate>
   <SMU.OrderByDateTT>Список обновлений будет упорядочен по времени обновления каждого мода, а не в алфавитном порядке</SMU.OrderByDateTT>
+  <SMU.preferOverlay>Предпочитайте наложение Steam для ссылок</SMU.preferOverlay>
+  <SMU.preferOverlaytt>При открытии мод-страницы предпочитает запускать ее в оверлее Steam, а не в браузере по умолчанию</SMU.preferOverlaytt>
 </LanguageData>

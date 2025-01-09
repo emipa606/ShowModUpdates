@@ -1,6 +1,7 @@
 ﻿using Mlie;
 using UnityEngine;
 using Verse;
+using Verse.Steam;
 
 namespace ShowModUpdates;
 
@@ -48,15 +49,27 @@ internal class ShowModUpdatesMod : Mod
     {
         var listing_Standard = new Listing_Standard();
         listing_Standard.Begin(rect);
+        if (listing_Standard.ButtonText(ShowModUpdates.GetUpdatesString(), widthPct: 0.5f))
+        {
+            Find.WindowStack.Add(new Dialog_ModUpdates());
+        }
+
         listing_Standard.Gap();
         listing_Standard.CheckboxLabeled("SMU.CheckAll".Translate(), ref Settings.CheckAll,
             "SMU.CheckAllTT".Translate());
         listing_Standard.CheckboxLabeled("SMU.CheckOnline".Translate(), ref Settings.CheckOnline,
             "SMU.CheckOnlineTT".Translate());
+
         if (Settings.CheckOnline)
         {
             listing_Standard.CheckboxLabeled("SMU.OrderByDate".Translate(), ref Settings.OrderByDate,
                 "SMU.OrderByDateTT".Translate());
+        }
+
+        if (SteamManager.Initialized)
+        {
+            listing_Standard.CheckboxLabeled("SMU.preferOverlay".Translate(), ref Settings.PreferOverlay,
+                "SMU.preferOverlaytt".Translate());
         }
 
         if (currentVersion != null)
