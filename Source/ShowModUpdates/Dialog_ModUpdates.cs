@@ -14,9 +14,9 @@ public class Dialog_ModUpdates : Window
     private const int headerHeight = 50;
     private const int rowHeight = 60;
     private static Vector2 scrollPosition;
-    private static readonly Color alternateBackground = new Color(0.3f, 0.3f, 0.3f, 0.5f);
-    private static readonly Vector2 previewImage = new Vector2(120f, 100f);
-    private static readonly Vector2 buttonSize = new Vector2(140f, 25f);
+    private static readonly Color alternateBackground = new(0.3f, 0.3f, 0.3f, 0.5f);
+    private static readonly Vector2 previewImage = new(120f, 100f);
+    private static readonly Vector2 buttonSize = new(140f, 25f);
     private static readonly Texture2D discordIcon = ContentFinder<Texture2D>.Get("UI/Discord");
     private static readonly Texture2D steamIcon = ContentFinder<Texture2D>.Get("UI/Steam");
     private static readonly Texture2D folderIcon = ContentFinder<Texture2D>.Get("UI/Folder");
@@ -27,12 +27,12 @@ public class Dialog_ModUpdates : Window
         doCloseX = true;
         forcePause = true;
         absorbInputAroundWindow = true;
-        localModUpdates = ShowModUpdatesMod.instance.Settings.OrderByDate
+        localModUpdates = ShowModUpdatesMod.Instance.Settings.OrderByDate
             ? ShowModUpdates.ModUpdates.OrderByDescending(info => info.Updated).ToList()
             : ShowModUpdates.ModUpdates.OrderBy(info => info.ModMetaData.Name).ToList();
     }
 
-    public override Vector2 InitialSize => new Vector2(700f, 700f);
+    public override Vector2 InitialSize => new(700f, 700f);
 
     public override void DoWindowContents(Rect inRect)
     {
@@ -47,13 +47,13 @@ public class Dialog_ModUpdates : Window
         if (SteamManager.Initialized && SteamUtils.IsOverlayEnabled())
         {
             listingStandard.CheckboxLabeled("SMU.preferOverlay".Translate(),
-                ref ShowModUpdatesMod.instance.Settings.PreferOverlay,
+                ref ShowModUpdatesMod.Instance.Settings.PreferOverlay,
                 "SMU.preferOverlaytt".Translate());
         }
 
         var subtitleRect = listingStandard.GetRect(50f);
         Widgets.Label(subtitleRect.BottomHalf(),
-            ShowModUpdatesMod.instance.Settings.CheckAll
+            ShowModUpdatesMod.Instance.Settings.CheckAll
                 ? "SMU.CheckingAll".Translate()
                 : "SMU.CheckingEnabled".Translate());
         Widgets.Label(subtitleRect.TopHalf(), ShowModUpdates.CurrentSaveName);
@@ -242,7 +242,7 @@ public class Dialog_ModUpdates : Window
 
     private static void openUrl(string url)
     {
-        if (ShowModUpdatesMod.instance.Settings.PreferOverlay)
+        if (ShowModUpdatesMod.Instance.Settings.PreferOverlay)
         {
             SteamUtility.OpenUrl(url);
         }

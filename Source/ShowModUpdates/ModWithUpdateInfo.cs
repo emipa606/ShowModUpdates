@@ -12,7 +12,7 @@ public class ModWithUpdateInfo(ModMetaData modMetaData)
     public string Description;
     public Uri DiscordUri;
     public Uri OtherUrl;
-    private bool Populated;
+    private bool populated;
     public Uri SteamChangelog;
     public Uri SteamUri;
     public bool Synced;
@@ -20,12 +20,12 @@ public class ModWithUpdateInfo(ModMetaData modMetaData)
 
     public void PopulateLinks()
     {
-        if (Populated)
+        if (populated)
         {
             return;
         }
 
-        Populated = true;
+        populated = true;
         if (PublishedFileId != PublishedFileId_t.Invalid)
         {
             Uri.TryCreate(ShowModUpdates.SteamBaseChangelogUri, PublishedFileId.ToString(), out SteamChangelog);

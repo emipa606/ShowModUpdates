@@ -15,7 +15,7 @@ namespace ShowModUpdates;
 [StaticConstructorOnStartup]
 public static class ShowModUpdates
 {
-    public static readonly Uri SteamBaseUri = new Uri("https://steamcommunity.com/sharedfiles/filedetails/?id=");
+    public static readonly Uri SteamBaseUri = new("https://steamcommunity.com/sharedfiles/filedetails/?id=");
 
     public static readonly Texture2D RimworldIcon = ContentFinder<Texture2D>.Get("UI/HeroArt/RimWorldLogo");
     public static readonly Texture2D RimworldTitle = ContentFinder<Texture2D>.Get("UI/HeroArt/GameTitle");
@@ -35,7 +35,7 @@ public static class ShowModUpdates
     ];
 
     public static readonly Uri SteamBaseChangelogUri =
-        new Uri("https://steamcommunity.com/sharedfiles/filedetails/changelog/");
+        new("https://steamcommunity.com/sharedfiles/filedetails/changelog/");
 
     public static bool NoExistingSave;
     public static string CurrentSavePath;
@@ -44,8 +44,8 @@ public static class ShowModUpdates
     public static DateTime SelectedDate;
     public static bool FinishedLoading;
     public static List<ModWithUpdateInfo> ModUpdates;
-    public static readonly List<ModWithUpdateInfo> AllSeenMods = [];
-    public static bool Scanning;
+    private static readonly List<ModWithUpdateInfo> AllSeenMods = [];
+    private static bool Scanning;
     private static CallResult<SteamUGCQueryCompleted_t> OnSteamUGCQueryCompletedCallResult;
     private static SteamUGCQueryCompleted_t collectionQueryResult;
 
@@ -81,12 +81,12 @@ public static class ShowModUpdates
         new Thread(() =>
         {
             Thread.CurrentThread.IsBackground = true;
-            CheckModUpdates();
+            checkModUpdates();
         }).Start();
         return false;
     }
 
-    public static void CheckModUpdates()
+    private static void checkModUpdates()
     {
         GameUpdated = false;
 
@@ -129,7 +129,7 @@ public static class ShowModUpdates
                 $"[ShowModUpdates]: Rimworld has updated since the last save, is now {VersionControl.CurrentVersionString}, was {saveVersion}");
         }
 
-        if (ShowModUpdatesMod.instance.Settings.CheckAll)
+        if (ShowModUpdatesMod.Instance.Settings.CheckAll)
         {
             foreach (var installedMod in ModLister.AllInstalledMods)
             {
@@ -200,9 +200,9 @@ public static class ShowModUpdates
         Log.Message(
             $"[ShowModUpdates]: {"SMU.LogMessage".Translate(ModUpdates.Count, NiceDate(SelectedDate))}\n{string.Join("\n", ModUpdates.Select(info => info.ModMetaData.Name))}");
 
-        if (ShowModUpdatesMod.instance.Settings.CheckOnline)
+        if (ShowModUpdatesMod.Instance.Settings.CheckOnline)
         {
-            PopulateDescriptions(ModUpdates);
+            populateDescriptions(ModUpdates);
         }
 
         ModUpdates.ForEach(modInfo => modInfo.PopulateLinks());
@@ -210,7 +210,7 @@ public static class ShowModUpdates
         FinishedLoading = true;
     }
 
-    public static void PopulateDescriptions(List<ModWithUpdateInfo> mods)
+    private static void populateDescriptions(List<ModWithUpdateInfo> mods)
     {
         var modsToCheck = mods.Where(mod => !mod.Synced && mod.PublishedFileId != PublishedFileId_t.Invalid).ToList();
 
@@ -228,11 +228,11 @@ public static class ShowModUpdates
 
         OnSteamUGCQueryCompletedCallResult = CallResult<SteamUGCQueryCompleted_t>.Create(OnSteamUGCQueryCompleted);
         collectionQueryResult = new SteamUGCQueryCompleted_t();
-        var UGCDetailsRequest = SteamUGC.CreateQueryUGCDetailsRequest(idsToCheck, (uint)idsToCheck.Length);
-        SteamUGC.SetReturnLongDescription(UGCDetailsRequest, true);
-        SteamUGC.SetReturnChildren(UGCDetailsRequest, true);
-        var createQueryUGCDetailsRequest = SteamUGC.SendQueryUGCRequest(UGCDetailsRequest);
-        OnSteamUGCQueryCompletedCallResult.Set(createQueryUGCDetailsRequest);
+        var ugcDetailsRequest = SteamUGC.CreateQueryUGCDetailsRequest(idsToCheck, (uint)idsToCheck.Length);
+        SteamUGC.SetReturnLongDescription(ugcDetailsRequest, true);
+        SteamUGC.SetReturnChildren(ugcDetailsRequest, true);
+        var createQueryUgcDetailsRequest = SteamUGC.SendQueryUGCRequest(ugcDetailsRequest);
+        OnSteamUGCQueryCompletedCallResult.Set(createQueryUgcDetailsRequest);
         while (collectionQueryResult.m_eResult == EResult.k_EResultNone)
         {
             Thread.Sleep(50);
@@ -246,17 +246,17 @@ public static class ShowModUpdates
 
         for (uint i = 0; i < idsToCheck.Length; i++)
         {
-            if (SteamUGC.GetQueryUGCResult(UGCDetailsRequest, i, out var details))
+            if (SteamUGC.GetQueryUGCResult(ugcDetailsRequest, i, out var details))
             {
                 modsToCheck[(int)i].Description = details.m_rgchDescription;
-                modsToCheck[(int)i].Updated = UnixTimeToDateTime(details.m_rtimeUpdated);
+                modsToCheck[(int)i].Updated = unixTimeToDateTime(details.m_rtimeUpdated);
             }
 
             modsToCheck[(int)i].Synced = true;
         }
     }
 
-    private static DateTime UnixTimeToDateTime(double unixTimeStamp)
+    private static DateTime unixTimeToDateTime(double unixTimeStamp)
     {
         var dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
         dateTime = dateTime.AddSeconds(unixTimeStamp).ToLocalTime();

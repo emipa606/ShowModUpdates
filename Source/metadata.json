@@ -2,11 +2,12 @@
   "Continued": false,
   "CanAdd": "0",
   "CanRemove": "0",
-  "PreviewVersion": "1.5",
+  "PreviewVersion": "1.6",
   "SocialImageSet": true,
   "FundingSet": true,
   "SearchTags": [
     "mod update checker",
     " steam links"
-  ]
+  ],
+  "LastXmlCleaning": "2025-06-12T20:58:21.1979267+02:00"
 }

@@ -11,7 +11,7 @@ internal class ShowModUpdatesMod : Mod
     /// <summary>
     ///     The instance of the settings to be read by the mod
     /// </summary>
-    public static ShowModUpdatesMod instance;
+    public static ShowModUpdatesMod Instance;
 
     private static string currentVersion;
 
@@ -21,7 +21,7 @@ internal class ShowModUpdatesMod : Mod
     /// <param name="content"></param>
     public ShowModUpdatesMod(ModContentPack content) : base(content)
     {
-        instance = this;
+        Instance = this;
         Settings = GetSettings<ShowModUpdatesSettings>();
         currentVersion = VersionFromManifest.GetVersionFromModMetaData(content.ModMetaData);
     }
@@ -47,40 +47,40 @@ internal class ShowModUpdatesMod : Mod
     /// <param name="rect"></param>
     public override void DoSettingsWindowContents(Rect rect)
     {
-        var listing_Standard = new Listing_Standard();
-        listing_Standard.Begin(rect);
-        if (listing_Standard.ButtonText(ShowModUpdates.GetUpdatesString(), widthPct: 0.5f))
+        var listingStandard = new Listing_Standard();
+        listingStandard.Begin(rect);
+        if (listingStandard.ButtonText(ShowModUpdates.GetUpdatesString(), widthPct: 0.5f))
         {
             Find.WindowStack.Add(new Dialog_ModUpdates());
         }
 
-        listing_Standard.Gap();
-        listing_Standard.CheckboxLabeled("SMU.CheckAll".Translate(), ref Settings.CheckAll,
+        listingStandard.Gap();
+        listingStandard.CheckboxLabeled("SMU.CheckAll".Translate(), ref Settings.CheckAll,
             "SMU.CheckAllTT".Translate());
-        listing_Standard.CheckboxLabeled("SMU.CheckOnline".Translate(), ref Settings.CheckOnline,
+        listingStandard.CheckboxLabeled("SMU.CheckOnline".Translate(), ref Settings.CheckOnline,
             "SMU.CheckOnlineTT".Translate());
 
         if (Settings.CheckOnline)
         {
-            listing_Standard.CheckboxLabeled("SMU.OrderByDate".Translate(), ref Settings.OrderByDate,
+            listingStandard.CheckboxLabeled("SMU.OrderByDate".Translate(), ref Settings.OrderByDate,
                 "SMU.OrderByDateTT".Translate());
         }
 
         if (SteamManager.Initialized)
         {
-            listing_Standard.CheckboxLabeled("SMU.preferOverlay".Translate(), ref Settings.PreferOverlay,
+            listingStandard.CheckboxLabeled("SMU.preferOverlay".Translate(), ref Settings.PreferOverlay,
                 "SMU.preferOverlaytt".Translate());
         }
 
         if (currentVersion != null)
         {
-            listing_Standard.Gap();
+            listingStandard.Gap();
             GUI.contentColor = Color.gray;
-            listing_Standard.Label("SMU.CurrentModVersion".Translate(currentVersion));
+            listingStandard.Label("SMU.CurrentModVersion".Translate(currentVersion));
             GUI.contentColor = Color.white;
         }
 
-        listing_Standard.End();
+        listingStandard.End();
     }
 
     public override void WriteSettings()
