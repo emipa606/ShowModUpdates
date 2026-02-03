@@ -148,14 +148,7 @@ public static class ShowModUpdates
 
                 var existingMod =
                     AllSeenMods.FirstOrDefault(mod => installedMod.SamePackageId(mod.ModMetaData.PackageId));
-                if (existingMod != null)
-                {
-                    ModUpdates.Add(existingMod);
-                }
-                else
-                {
-                    ModUpdates.Add(new ModWithUpdateInfo(installedMod));
-                }
+                ModUpdates.Add(existingMod ?? new ModWithUpdateInfo(installedMod));
             }
         }
         else
@@ -178,14 +171,7 @@ public static class ShowModUpdates
                 var existingMod =
                     AllSeenMods.FirstOrDefault(mod =>
                         modContentPack.ModMetaData.SamePackageId(mod.ModMetaData.PackageId));
-                if (existingMod != null)
-                {
-                    ModUpdates.Add(existingMod);
-                }
-                else
-                {
-                    ModUpdates.Add(new ModWithUpdateInfo(modContentPack.ModMetaData));
-                }
+                ModUpdates.Add(existingMod ?? new ModWithUpdateInfo(modContentPack.ModMetaData));
             }
         }
 
@@ -202,7 +188,7 @@ public static class ShowModUpdates
 
         if (ShowModUpdatesMod.Instance.Settings.CheckOnline)
         {
-            populateDescriptions(ModUpdates);
+            populateDescriptions();
         }
 
         ModUpdates.ForEach(modInfo => modInfo.PopulateLinks());
@@ -210,9 +196,12 @@ public static class ShowModUpdates
         FinishedLoading = true;
     }
 
-    private static void populateDescriptions(List<ModWithUpdateInfo> mods)
+    private static void populateDescriptions()
     {
-        var modsToCheck = mods.Where(mod => !mod.Synced && mod.PublishedFileId != PublishedFileId_t.Invalid).ToList();
+        var modsToCheck = ModUpdates.Where(mod =>
+                !mod.Synced && mod.PublishedFileId != PublishedFileId_t.Invalid &&
+                mod.ModMetaData.FolderName == mod.PublishedFileId.ToString())
+            .ToList();
 
         if (!modsToCheck.Any())
         {
@@ -246,13 +235,28 @@ public static class ShowModUpdates
 
         for (uint i = 0; i < idsToCheck.Length; i++)
         {
-            if (SteamUGC.GetQueryUGCResult(ugcDetailsRequest, i, out var details))
+            var id = idsToCheck[i];
+            var modToUpdate = ModUpdates.FirstOrDefault(mod =>
+                mod.PublishedFileId == id && !mod.Synced);
+            if (modToUpdate == null)
             {
-                modsToCheck[(int)i].Description = details.m_rgchDescription;
-                modsToCheck[(int)i].Updated = unixTimeToDateTime(details.m_rtimeUpdated);
+                continue;
             }
 
-            modsToCheck[(int)i].Synced = true;
+            if (SteamUGC.GetQueryUGCResult(ugcDetailsRequest, i, out var details))
+            {
+                modToUpdate.Description = details.m_rgchDescription;
+                modToUpdate.Updated = unixTimeToDateTime(details.m_rtimeUpdated);
+            }
+            else
+            {
+                Log.Message(
+                    $"[ShowModUpdates]: Could not get Steam details for mod '{modToUpdate.ModMetaData.FolderName}', using local data");
+                modToUpdate.Description = modToUpdate.ModMetaData.Description;
+                modToUpdate.Updated = modToUpdate.ModMetaData.RootDir.LastWriteTime;
+            }
+
+            modToUpdate.Synced = true;
         }
     }
 
