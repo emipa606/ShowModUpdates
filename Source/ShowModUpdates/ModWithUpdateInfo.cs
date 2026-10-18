@@ -12,11 +12,11 @@ public class ModWithUpdateInfo(ModMetaData modMetaData)
     public string Description;
     public Uri DiscordUri;
     public Uri OtherUrl;
-    private bool populated;
     public Uri SteamChangelog;
     public Uri SteamUri;
     public bool Synced;
     public DateTime Updated;
+    private bool populated;
 
     public void PopulateLinks()
     {
@@ -48,7 +48,8 @@ public class ModWithUpdateInfo(ModMetaData modMetaData)
         }
 
         var urlsInDescription = Regex.Matches(Description,
-            "(http|ftp|https):\\/\\/([\\w_-]+(?:(?:\\.[\\w_-]+)+))([\\w.,@?^=%&:\\/~+#-]*[\\w@?^=%&\\/~+#-])");
+            "(http|ftp|https):\\/\\/([\\w_-]+(?:(?:\\.[\\w_-]+)+))([\\w.,@?^=%&:\\/~+#-]*[\\w@?^=%&\\/~+#-])",
+            RegexOptions.None, TimeSpan.FromSeconds(1));
 
         if (urlsInDescription.Count == 0)
         {

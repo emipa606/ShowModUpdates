@@ -6,7 +6,7 @@ namespace ShowModUpdates;
 
 [HarmonyPatch(typeof(Widgets), nameof(Widgets.ButtonText), typeof(Rect), typeof(string), typeof(bool), typeof(bool),
     typeof(bool), typeof(TextAnchor))]
-public static class Widgets_ButtonText_Postfix
+public static class Widgets_ButtonText
 {
     public static void Postfix(Rect rect, string label)
     {

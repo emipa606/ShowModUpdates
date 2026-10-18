@@ -1,62 +1,60 @@
-# GitHub Copilot Instructions for Show Mod Updates
+# Copilot Instructions: Show Mod Updates
 
 ## Mod Overview and Purpose
 
-**Show Mod Updates** is a RimWorld mod designed to provide players with information about which mods have been updated since their last game session. Upon startup, it compares the current mod versions against those recorded in your most recently saved game. If you load an older save, the mod will adapt by rescanning based on that save. It also checks for updates to the RimWorld game itself. This utility is particularly helpful for diagnosing issues caused by recent mod updates.
+**Mod Name:** Show Mod Updates  
+**Mod Description:** Show Mod Updates is a mod for RimWorld designed to keep players informed about changes to their active mods. Whenever you load your game, the mod checks which mods have been updated since your last saved game. It displays a list of these updated mods, along with links to their Steam Workshop pages, changelogs, or any other proprietary links specified by the mod authors. This feature is especially useful for identifying what might be causing new issues or changes in gameplay following updates.
+
+Additionally, the mod detects updates to RimWorld itself. Users can configure it to check all installed mods—not just those currently enabled—and opt to fetch mod information directly from Steam. The mod also includes a setting that allows players to sort the mod list by update date.
+
+In the unfortunate event of a game crash before the update list can be viewed, the mod logs the details of any changed mods to the game's debug log.
 
 ## Key Features and Systems
 
-- **Mod Update Checks**: On game startup, the mod checks which active mods have been updated since your last save. It displays this information in a convenient list with links to Steam, changelogs, or other specified URLs.
-- **Source Indication**: Displays icons indicating whether a mod is stored locally or in the Steam folder.
-- **Extended Options**: Optional settings to check all installed mods, not just the ones that are currently enabled.
-- **Sorting Capability**: Allows sorting of the mod list by update date via mod options.
-- **Crash-Safe Logging**: If the game crashes before displaying updates, the mod logs changes in the game log.
-- **Online Integration**: Fetch mod information directly from Steam and display additional links like Discord if available.
+1. **Mod Update Detection:** Scans and identifies mods that have been updated since the last game save.
+2. **Link Display:** Provides links to the Steam Workshop, changelogs, and Discord where applicable.
+3. **Local vs. Steam Folder Indicator:** Displays icons to show whether mods are located in the local mod folder or the Steam mod folder.
+4. **Settings Control:** Users can choose to check all mods or only enabled ones, fetch mod info from Steam, and sort mod lists by update date.
+5. **Crash Log Entries:** Captures mod update information in the log if a crash occurs, ensuring no information is lost.
+6. **Localization Support:** Features updates like Chinese translation for broader accessibility.
 
 ## Coding Patterns and Conventions
 
-### General Structure
-
-- Follow typical C# coding conventions:
-  - Use PascalCase for class names, method names, and properties.
-  - Use camelCase for local variables and method arguments.
-  - Indent with four spaces.
-- Code files align with game functionality, and class documentation is advised where necessary to maintain clarity.
-
-### Class Overview
-
-- **Dialog_ModUpdates**: Manages the display window that shows updated mod information.
-- **ModWithUpdateInfo**: Wraps mod metadata and populates additional information like links.
-- **ShowModUpdatesMod**: Handles mod initialization and settings.
-- **ShowModUpdatesSettings**: Defines and manages user-configurable settings for the mod.
+- **C# Structure:** The code is organized into multiple classes, each with a specific responsibility, following SOLID principles.
+- **Naming Conventions:** Types and members are clearly named to reflect their functionality (e.g., `ShowModUpdatesMod`, `PopulateLinks`).
+- **Modular Code:** Code is divided into logically separated files, each dealing with different aspects of functionality.
 
 ## XML Integration
 
-- XML is primarily used for defining mod settings and translations which allow seamless integration with the game’s options menu.
-- Maintain XML documents for settings and localization in the appropriate folders. Example: `Languages/English/Keyed/ShowModUpdates.xml`.
+- **Defs Management:** The mod uses an XML file, `UpdateInfo.xml`, located in the Defs directory (`1.6/Defs/UpdateInfo.xml`), to define and load update info-related configurations.
+- **XML Schema:** The XML structure adheres to RimWorld's modding standards with custom def types for ease of integration and data management.
 
 ## Harmony Patching
 
-- Use Harmony to apply patches where necessary to integrate with existing game methods without altering base game code.
-- Common pattern includes creating postfix classes like `OptionListingUtility_DrawOptionListing_Postfix` and `Widgets_ButtonText_Postfix` for adding additional functionality post execution of game functions.
+- **Patch Files:** The mod uses Harmony for method patching to enhance or alter existing gameplay functionality without direct modification.
+- **Postfixes:** Defined in files like `OptionListingUtility_DrawOptionListing_Postfix.cs`, offering a way to extend existing methods in RimWorld after their original code is executed.
 
 ## Suggestions for Copilot
 
-- Utilize Copilot to streamline repetitive tasks, such as creating new XML keys or generating boilerplate class methods.
-- When dealing with Harmony, leverage Copilot to generate additional IL or transpiler patches when needed.
-- Copilot can assist in link extraction algorithms to populate URLs more efficiently by generating auxiliary functions.
+- **Code Completion:** Copilot can be used to generate boilerplate C# code and XML templates based on existing coding patterns used in the project. This includes class structures, method signatures, and Harmony patches.
+- **Error Handling:** Suggest Copilot to provide code snippets for improved error handling to ensure mod stability.
+- **Localization Support:** Utilize Copilot for generating localization keys and templates, facilitating translation features.
+- **XML Handling:** Copilot can help in generating well-formed XML files in accordance with RimWorld's schema when adding new definitions or settings.
 
-### Example Harmony Use:
+In summary, the Show Mod Updates mod is a valuable tool for any RimWorld player looking to keep track of mod updates effortlessly, enhancing gameplay stability and customization through transparent mod management.
 
-csharp
-public static class SavedGameLoaderNow_LoadGameFromSaveFileNow_Postfix
-{
-    // Use Copilot to generate placeholder patch code
-    public static void Postfix(string saveFileName)
-    {
-        // Example of reading save metadata and triggering mod update check
-    }
-}
+## Project Solution Guidelines
+- Relevant mod XML files are included as Solution Items under the solution folder named XML, these can be read and modified from within the solution.
+- Use these in-solution XML files as the primary files for reference and modification.
+- The `.github/copilot-instructions.md` file is included in the solution under the `.github` solution folder, so it should be read/modified from within the solution instead of using paths outside the solution. Update this file once only, as it and the parent-path solution reference point to the same file in this workspace.
+- When making functional changes in this mod, ensure the documented features stay in sync with implementation; use the in-solution `.github` copy as the primary file.
+- In the solution is also a project called Assembly-CSharp, containing a read-only version of the decompiled game source, for reference and debugging purposes.
+- For any new documentation, update this copilot-instructions.md file rather than creating separate documentation files.
 
 
-By following these instructions and patterns, you will maintain consistency and functionality in developing the Show Mod Updates mod for RimWorld.
+## Hard rules (must follow)
+- Do NOT run commands that modify the repo (no git commit, git apply, dotnet format) unless explicitly asked.
+- Prefer minimal reads: read only the smallest code region needed (around the suspicious lines).
+- When mentioning SonarQube issues, automatically use the SonarQube MCP service to fetch and address issues instead of making inferred fixes without querying SonarQube first.
+- When mentioning the rimworld log, automatically use the Rimworld MCP service to fetch the log.
+

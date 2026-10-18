@@ -56,7 +56,6 @@ public static class ShowModUpdates
 
     public static string NiceDate(DateTime date)
     {
-        //return date.ToString("yy-MM-dd HH:mm:ss");
         return date.ToString(Prefs.TwelveHourClockMode ? "g" : "yy-MM-dd HH:mm:ss");
     }
 
@@ -262,9 +261,7 @@ public static class ShowModUpdates
 
     private static DateTime unixTimeToDateTime(double unixTimeStamp)
     {
-        var dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-        dateTime = dateTime.AddSeconds(unixTimeStamp).ToLocalTime();
-        return dateTime;
+        return DateTime.UnixEpoch.AddSeconds(unixTimeStamp).ToLocalTime();
     }
 
     private static void OnSteamUGCQueryCompleted(SteamUGCQueryCompleted_t pCallback, bool bIOFailure)

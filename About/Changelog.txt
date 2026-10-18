@@ -1,5 +1,8 @@
 # Changelog for ShowModUpdates
 
+1.7.0 - Mod updated for 1.7 and passed autotests
+
+
 1.6.1 - Fixed issue with discord-links when having the same mod locally and subscribed.
 
 

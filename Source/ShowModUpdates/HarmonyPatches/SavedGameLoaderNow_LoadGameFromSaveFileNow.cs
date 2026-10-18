@@ -5,7 +5,7 @@ using Verse;
 namespace ShowModUpdates;
 
 [HarmonyPatch(typeof(SavedGameLoaderNow), nameof(SavedGameLoaderNow.LoadGameFromSaveFileNow))]
-public static class SavedGameLoaderNow_LoadGameFromSaveFileNow_Postfix
+public static class SavedGameLoaderNow_LoadGameFromSaveFileNow
 {
     public static void Postfix(string fileName)
     {

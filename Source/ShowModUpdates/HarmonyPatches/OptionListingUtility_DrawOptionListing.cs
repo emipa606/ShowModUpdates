@@ -7,7 +7,7 @@ namespace ShowModUpdates;
 
 [HarmonyPatch(typeof(OptionListingUtility), nameof(OptionListingUtility.DrawOptionListing), typeof(Rect),
     typeof(List<ListableOption>))]
-public static class OptionListingUtility_DrawOptionListing_Postfix
+public static class OptionListingUtility_DrawOptionListing
 {
     public static void Postfix(Rect rect, List<ListableOption> optList, float __result)
     {
